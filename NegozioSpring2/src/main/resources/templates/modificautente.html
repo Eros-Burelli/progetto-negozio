@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head th:include="CDN.html">
+	<title>Modifica utente</title>
+</head>
+<body>
+	<div th:insert="nav.html"></div>
+	<div class="container">
+		<h3>Modifica</h3>
+		<form method="post" th:action="@{/saveUtente}" th:object="${utente}"
+			class="form-horizontal">
+			<input type="hidden" th:field="*{id_Utente}" required/>
+			<input type="hidden" th:field="*{username}" required/>
+			<!-- NOME -->
+			<div class="form-group">
+				<label class="col-md-1 control-label">Nome</label>
+				<div class="col-md-4 inputGroupContainer">
+					<div class="input-group">
+						<span class="input-group-addon"> <i
+							class="glyphicon glyphicon-user"></i>
+						</span> <input type="text" class="form-control" id="nome"
+							th:field="*{nome}" required />
+					</div>
+				</div>
+			</div>
+
+			<!-- COGNOME -->
+			<div class="form-group">
+				<label class="col-md-1 control-label">Cognome</label>
+				<div class="col-md-4 inputGroupContainer">
+					<div class="input-group">
+						<span class="input-group-addon"> <i
+							class="glyphicon glyphicon-user"></i>
+						</span> <input type="text" class="form-control" id="cognome"
+							th:field="*{cognome}" required>
+					</div>
+				</div>
+			</div>
+
+			<!-- EMAIL -->
+			<div class="form-group">
+				<label class="col-md-1 control-label">Email</label>
+				<div class="col-md-4 inputGroupContainer">
+					<div class="input-group">
+						<span class="input-group-addon"> <i
+							class="glyphicon glyphicon-envelope"></i>
+						</span> <input type="text" class="form-control" id="email"
+							th:field="*{email}" required>
+					</div>
+				</div>
+			</div>
+
+			<!-- INDIRIZZO -->
+			<div class="form-group">
+				<label class="col-md-1 control-label">Indirizzo</label>
+				<div class="col-md-4 inputGroupContainer">
+					<div class="input-group">
+						<span class="input-group-addon"> <i
+							class="glyphicon glyphicon-home"></i>
+						</span> <input type="text" class="form-control" id="indirizzo"
+							th:field="*{indirizzo}" required>
+					</div>
+				</div>
+			</div>
+
+			<!-- PASSWORD -->
+			<div class="form-group">
+				<label class="col-md-1 control-label">Password</label>
+				<div class="col-md-4 inputGroupContainer">
+					<div class="input-group">
+						<span class="input-group-addon"> <i
+							class="glyphicon glyphicon-lock"></i>
+						</span> <input type="password" class="form-control" id="password"
+							th:field="*{password}" required>
+					</div>
+				</div>
+			</div>
+
+			<!-- BUTTON -->
+			<div class="row">
+				<div class="col-md-4 col-md-offset-1">
+					<button type="submit" class="btn btn-primary">
+						Salva <span class="glyphicon glyphicon-save"></span>
+					</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</body>
+</html>

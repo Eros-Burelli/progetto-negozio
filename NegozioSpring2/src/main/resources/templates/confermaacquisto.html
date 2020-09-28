@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head th:include="CDN.html">
+<meta charset="ISO-8859-1">
+<title>Conferma Acquisto</title>
+</head>
+<body>
+<div th:insert="nav.html"></div>
+	<div class="container">
+		<div class="page-header">
+			<h3>Conferma acquisto</h3>
+			<div class="panel panel-primary">
+			<div class="panel panel-heading">
+					<p>Acquisto effettuato correttamente</p>
+				</div>
+			<div class="panel panel-body">
+				<a th:href="@{/articoli}">Torna agli acquisti</a>
+				<br>
+				<br>
+				<a th:href="@{/logout}">Logout</a>
+			</div>
+			</div>
+		</div>
+	</div>		
+</body>
+</html>

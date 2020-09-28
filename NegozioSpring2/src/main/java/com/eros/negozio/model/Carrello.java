@@ -1,0 +1,72 @@
+package com.eros.negozio.model;
+
+import java.util.Enumeration;
+import java.util.Hashtable;
+
+import javax.annotation.ManagedBean;
+
+@ManagedBean
+public class Carrello {
+    private Hashtable<String, String[]> prodotti = new Hashtable<String, String[]>();
+    private int articoli;
+
+    public Carrello() {
+	articoli = 0;
+    }
+
+    public int totaleArticoli() {
+	return articoli;
+    }
+    
+    public Enumeration<String[]> listaArticoli(){
+	return prodotti.elements();
+    }
+    
+    public void aggiungiArticolo(String id, String marca, String modello, Double prezzo) {
+	String[] record = {marca, modello, Double.toString(prezzo), "1", id};
+	articoli++;
+	if (prodotti.containsKey(id)) {
+	    String[] dati = prodotti.get(id);
+	    int quantita = Integer.parseInt(dati[3]);
+	    quantita++;
+	    dati[3] = Integer.toString(quantita);
+	    prodotti.put(id, dati);
+	} else {
+	    prodotti.put(id, record);
+	}
+    }
+    
+    public void rimuoviArticolo(String id) {
+	if(prodotti.containsKey(id)) {
+	    articoli--;
+	    String[] dati = prodotti.get(id);
+	    if(Integer.parseInt(dati[3]) == 1) {
+		prodotti.remove(id);
+	    }else {
+		int quantita = Integer.parseInt(dati[3]);
+		quantita--;
+		dati[3] = Integer.toString(quantita);
+		prodotti.put(id, dati);
+	    }
+	}
+    }
+    
+    public double totaleComplessivo() {
+	double totale = 0.00;
+	Enumeration<String[]> enumerazione = listaArticoli();
+	String[] dati;
+	while(enumerazione.hasMoreElements()) {
+	    dati = enumerazione.nextElement();
+	    totale += Double.parseDouble(dati[2]) * Integer.parseInt(dati[3]); 
+	}
+	return totale;
+    }
+    
+	public double totaleParziale(String id) {
+		double totale = 0.00;
+		String[] dati = prodotti.get(id);
+		totale += Double.parseDouble(dati[2]) * Integer.parseInt(dati[3]);
+		return totale;
+	}
+	
+}

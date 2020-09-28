@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head th:include="CDN.html">
+<meta charset="ISO-8859-1">
+<title>Carrello</title>
+</head>
+<body>
+<div >
+	<div  th:insert="nav.html"></div>
+	<div class="container" >
+		<h3>Articoli presenti nel carrello</h3>
+		<div class="table-responsive">
+			<table class="table table-hover" style="width: 100%;">
+				<thead>
+					<tr>
+						<th>Marca</th>
+						<th>Modello</th>
+						<th>Prezzo</th>
+						<th>Quantit&agrave;</th>
+						<th>Totale parziale</th>
+						<th>Rimuovi</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="articolo:${listaArticoli}">
+						<td th:text="${articolo[0]}"></td>
+						<td th:text="${articolo[1]}"></td>
+						<td th:text="${articolo[2]}"></td>
+						<td th:text="${articolo[3]}"></td>
+						<td th:text="${session.carrello.totaleParziale(articolo[4])}"></td>
+						<td>
+							<form th:action="@{|/rimuoviarticolo/${articolo[4]}|}">
+								<button class="btn-xs btn-danger">
+									<span class="glyphicon glyphicon-minus"></span>
+								</button>
+							</form>
+					</tr>
+				</tbody>
+			</table>
+
+			<div th:if="${totaleComplessivo != 0 }">
+				<h5>Totale:</h5>
+				<p th:text="${totaleComplessivo}"></p>
+				<!-- PASSAGGIO DATI PER SALVATAGGIO -->
+				<form th:action="@{/salvaordine}">
+					<button type="submit" class="btn btn-success">
+					Acquista <span class="glyphicon glyphicon-euro"></span></button>
+				</form>
+				<br>
+				<form th:action="@{/svuotacarrello}">
+					<button type="submit" class="btn btn-danger">
+						Svuota carrello <span class="glyphicon glyphicon-trash"></span>
+					</button>
+				</form>
+
+		</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>

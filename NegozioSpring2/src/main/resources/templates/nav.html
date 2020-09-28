@@ -1,0 +1,57 @@
+<nav class="navbar navbar-inverse" xmlns:th="www.thymeleaf.org" th:object="${session.utente}">
+	<span th:object="${session.amministratore}"></span>
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse"
+			data-target="#menu">
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" th:href = "@{/}"><span class="glyphicon glyphicon-home"></span></a>
+		</div>
+		<div th:if="${session.isEmpty()}">
+		<div class="collapse navbar-collapse" id="menu">
+			<ul class="nav navbar-nav navbar-right">
+				<li><a th:href="@{/registra}"><span
+						class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+				<li><a th:href="@{/login}"><span
+						class="glyphicon glyphicon-log-in"></span> Login</a></li>
+			</ul>
+		</div>
+		 </div>
+	
+		<!-- SESSIONE UTENTE -->
+		<div th:if="${session.utente != null}">
+		<div class="collapse navbar-collapse" id="menuUser">
+			<ul class="nav navbar-nav">
+				<li><a th:href="@{/articoli}">Scelta articoli</a></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+			<li><a th:href="@{/carrello}"><span class="glyphicon glyphicon-shopping-cart">
+			</span>
+			<span class="badge"></span>
+			</a></li>	
+			<li><a th:href="@{|/dettagliutente/*{id_Utente}|}"><span class="glyphicon glyphicon-user" th:text="*{username}"></span>
+			</a></li>
+			<li><a th:href="@{/logout}"><span
+				class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+			</ul>
+		</div>
+</div>
+		<!-- SESSIONE AMMINISTRATORE -->
+
+		<div th:if="${session.amministratore != null}">
+		<div class="collapse navbar-collapse" id="menu">
+			<ul class="nav navbar-nav navbar-left">
+				<li><a th:href="@{/gestisciarticoli}">Gestisci Articoli</a></li>
+				<li><a th:href="@{/visualizzaordini}">Report Ordini</a></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+			<li><a><span class="glyphicon glyphicon-user" th:text="${session.amministratore.username}"></span>
+			</a></li>
+			<li><a th:href="@{/logout}"><span
+				class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+			</ul>
+			</div>
+		</div>
+</div>
+</nav>
